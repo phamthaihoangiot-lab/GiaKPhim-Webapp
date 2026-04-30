@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Giá Không In Phim</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-hospital-user"></i>
+                    <h1>Hệ Thống Giá</h1>
+                </div>
+                <p class="subtitle">Không in phim</p>
+            </div>
+            
+            <div class="sidebar-search">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="hospital-search" placeholder="Tìm bệnh viện...">
+            </div>
+
+            <div class="hospital-list-container">
+                <ul id="hospital-list" class="hospital-list">
+                    <!-- Sẽ được điền bằng JavaScript -->
+                    <div class="loading-hospitals">
+                        <div class="spinner"></div>
+                        <span>Đang tải danh sách...</span>
+                    </div>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="current-selection">
+                    <h2 id="current-hospital-name">Vui lòng chọn bệnh viện</h2>
+                    <span id="record-count" class="badge hidden">0 dịch vụ</span>
+                </div>
+                <div class="actions">
+                    <button id="btn-refresh" class="btn btn-icon" title="Làm mới dữ liệu">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                    <div class="theme-toggle">
+                        <input type="checkbox" class="checkbox" id="checkbox">
+                        <label for="checkbox" class="checkbox-label">
+                            <i class="fas fa-moon"></i>
+                            <i class="fas fa-sun"></i>
+                            <span class="ball"></span>
+                        </label>
+                    </div>
+                </div>
+            </header>
+
+            <div class="table-container">
+                <div id="loader" class="loader-overlay hidden">
+                    <div class="loader-content">
+                        <div class="spinner-large"></div>
+                        <p>Đang tải dữ liệu từ cơ sở dữ liệu...</p>
+                    </div>
+                </div>
+                
+                <div id="empty-state" class="empty-state">
+                    <img src="https://illustrations.popsy.co/amber/freelancer.svg" alt="Select data" class="empty-img">
+                    <h3>Chưa có dữ liệu hiển thị</h3>
+                    <p>Hãy chọn một bệnh viện từ danh sách bên trái để xem bảng giá dịch vụ Không in phim.</p>
+                </div>
+
+                <div class="table-wrapper hidden" id="data-table-wrapper">
+                    <div class="table-actions">
+                        <div class="search-box">
+                            <i class="fa-solid fa-filter"></i>
+                            <input type="text" id="service-search" placeholder="Lọc theo mã, tên dịch vụ...">
+                        </div>
+                    </div>
+                    <table class="glass-table">
+                        <thead>
+                            <tr>
+                                <th width="5%">STT</th>
+                                <th width="10%">Mã</th>
+                                <th width="25%">Tên</th>
+                                <th width="25%">Tên Phê Duyệt</th>
+                                <th width="15%" class="text-right">Giá (VNĐ)</th>
+                                <th width="20%">Ghi Chú</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Dữ liệu sẽ được điền ở đây -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
