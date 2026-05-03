@@ -2,15 +2,24 @@ import os
 import sys
 from flask import Flask, render_template, jsonify
 import requests
+from dotenv import load_dotenv
 
 # Thiết lập encoding
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
+# Nạp biến môi trường từ file .env
+load_dotenv()
+
 app = Flask(__name__)
 
-url: str = "https://yqwfxqqoeveafnpcprhf.supabase.co"
-key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlxd2Z4cXFvZXZlYWZucGNwcmhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2NjM4NTksImV4cCI6MjA5MjIzOTg1OX0.wVeDB1a1WYQibIfZbq5IR8tfuS2gr7WOwM4Vl8IdEhM"
+# Đọc thông tin kết nối Supabase từ biến môi trường
+url: str = os.environ.get("SUPABASE_URL", "")
+key: str = os.environ.get("SUPABASE_KEY", "")
+
+if not url or not key:
+    raise EnvironmentError("Thiếu biến môi trường SUPABASE_URL hoặc SUPABASE_KEY. Vui lòng kiểm tra file .env")
+
 headers = {
     "apikey": key,
     "Authorization": f"Bearer {key}",
